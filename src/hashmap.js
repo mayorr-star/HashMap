@@ -39,8 +39,6 @@ function CreateHashMap() {
       bucketList[hashCode].appendHashMapNode(key, value);
     }
     const basePoint = Math.round(capacity * LOAD_FACTOR);
-    console.log(`basePoint is ${basePoint}`)
-    console.log(`length is ${length()}`)
     if (length() > basePoint) {
       growBuckets();
     }
@@ -162,7 +160,6 @@ function CreateHashMap() {
     values,
     entries,
     growBuckets,
-    bucketList,
   };
 }
 
