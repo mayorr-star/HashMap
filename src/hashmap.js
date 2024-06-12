@@ -1,8 +1,10 @@
 const LinkedList = require("./linkedlist");
 
-function CreateHashmap() {
+function CreateHashMap() {
   const bucketList = [];
-  bucketList.length = 16;
+  let capacity = 16;
+  bucketList.length = capacity;
+  const LOAD_FACTOR = 0.75;
 
   const hash = (key) => {
     let hashCode = 0;
@@ -34,7 +36,13 @@ function CreateHashmap() {
         const list = new LinkedList();
         bucketList[hashCode] = list;
       }
-      bucketList[hashCode].appendNode(key, value);
+      bucketList[hashCode].appendHashMapNode(key, value);
+    }
+    const basePoint = Math.round(capacity * LOAD_FACTOR);
+    console.log(`basePoint is ${basePoint}`)
+    console.log(`length is ${length()}`)
+    if (length() > basePoint) {
+      growBuckets();
     }
   };
 
@@ -107,7 +115,7 @@ function CreateHashmap() {
       }
     }
     return keysStored;
-  }
+  };
 
   const values = () => {
     const valuesStored = [];
@@ -121,7 +129,7 @@ function CreateHashmap() {
       }
     }
     return valuesStored;
-  }
+  };
 
   const entries = () => {
     const keyValuePair = [];
@@ -135,8 +143,12 @@ function CreateHashmap() {
       }
     }
     return keyValuePair;
-  }
-  
+  };
+
+  const growBuckets = () => {
+    capacity *= 2;
+    bucketList.length = capacity;
+  };
 
   return {
     hash,
@@ -148,8 +160,10 @@ function CreateHashmap() {
     clear,
     keys,
     values,
-    entries
+    entries,
+    growBuckets,
+    bucketList,
   };
 }
 
-module.exports = CreateHashmap;
+module.exports = CreateHashMap;
