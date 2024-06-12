@@ -1,5 +1,5 @@
 const createNode = require("./nodes");
-class linkedList {
+class LinkedList {
   constructor() {
     this.headNode = null;
   }
@@ -18,4 +18,4 @@ class linkedList {
   }
 }
 
-module.exports = linkedList;
+module.exports = LinkedList;
