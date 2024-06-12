@@ -2,11 +2,11 @@ const linkedList = require("./linkedlist");
 const createNode = require("./nodes");
 
 function createHashmap() {
-  const buckectList = [];
-  buckectList.length = 16;
-  for (let i = 0; i < buckectList.length; i++) {
+  const BUCKET_LIST = [];
+  BUCKET_LIST.length = 16;
+  for (let i = 0; i < BUCKET_LIST.length; i++) {
     const list = new linkedList();
-    buckectList[i] = list;
+    BUCKET_LIST[i] = list;
   }
 
   const hash = (key) => {
@@ -14,14 +14,14 @@ function createHashmap() {
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
       hashCode =
-        (primeNumber * hashCode + key.codePointAt(i)) % buckectList.length;
+        (primeNumber * hashCode + key.codePointAt(i)) % BUCKET_LIST.length;
     }
     return hashCode;
   };
 
   const overwriteValue = (key, newValue) => {
     const hashCode = hash(key);
-    let currentNode = buckectList[hashCode].headNode;
+    let currentNode = BUCKET_LIST[hashCode].headNode;
     while (currentNode) {
       if (currentNode.key === key) {
         currentNode.value = newValue;
@@ -35,13 +35,13 @@ function createHashmap() {
       overwriteValue(key, value)
     } else {
       const hashCode = hash(key);
-      buckectList[hashCode].appendNode(key, value);
+      BUCKET_LIST[hashCode].appendNode(key, value);
     }
   };
 
   const get = (key) => {
     const hashCode = hash(key);
-    let pointer = buckectList[hashCode].headNode;
+    let pointer = BUCKET_LIST[hashCode].headNode;
     while (pointer) {
       if (key === pointer.key) return pointer.value;
       pointer = pointer.nextNode;
@@ -51,7 +51,7 @@ function createHashmap() {
 
   const has = (key) => {
     const hashCode = hash(key);
-    let pointer = buckectList[hashCode].headNode;
+    let pointer = BUCKET_LIST[hashCode].headNode;
     while (pointer) {
       if (key === pointer.key) return true;
       pointer = pointer.nextNode;
@@ -63,11 +63,11 @@ function createHashmap() {
     if (!has(key)) return false;
     const hashCode = hash(key);
     let previousPointer = null;
-    let pointer = buckectList[hashCode].headNode;
+    let pointer = BUCKET_LIST[hashCode].headNode;
     while (pointer) {
       if (pointer.key === key) {
         if (!previousPointer) {
-          buckectList[hashCode].headNode = pointer.nextNode;
+          BUCKET_LIST[hashCode].headNode = pointer.nextNode;
         } else {
           previousPointer.nextNode = pointer.nextNode;
         }
@@ -77,13 +77,26 @@ function createHashmap() {
     }
   };
 
+  const length = () => {
+    let numberOfKeys = 0;
+    for (const bucket of BUCKET_LIST) {
+      let currentNode = bucket.headNode;
+      while (currentNode !== null) {
+        numberOfKeys++;
+        currentNode = currentNode.nextNode;
+      }
+    }
+    return numberOfKeys;
+  }
+
   return {
     hash,
     set,
-    buckectList,
+    BUCKET_LIST,
     get,
     has,
     remove,
+    length,
   };
 }
 
