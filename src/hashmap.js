@@ -149,7 +149,6 @@ function CreateHashMap() {
   };
 
   return {
-    hash,
     set,
     get,
     has,
@@ -159,7 +158,6 @@ function CreateHashMap() {
     keys,
     values,
     entries,
-    growBuckets,
   };
 }
 
