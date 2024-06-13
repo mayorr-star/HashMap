@@ -46,6 +46,7 @@ function createHashMap() {
 
   const get = (key) => {
     const hashCode = hash(key);
+    if (!bucketList[hashCode]) return null;
     let pointer = bucketList[hashCode].headNode;
     while (pointer) {
       if (key === pointer.key) return pointer.value;
