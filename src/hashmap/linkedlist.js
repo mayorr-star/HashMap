@@ -1,11 +1,11 @@
-const CreateHashMapNode = require("./nodes");
+const createNode = require("./nodes");
 class LinkedList {
   constructor() {
     this.headNode = null;
   }
 
-  appendHashMapNode(key, value) {
-    const newNode = CreateHashMapNode(key, value);
+  appendNode(key, value) {
+    const newNode = createNode(key, value);
     if (this.headNode === null) {
       this.headNode = newNode;
     } else {

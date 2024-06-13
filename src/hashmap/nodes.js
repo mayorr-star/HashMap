@@ -1,4 +1,4 @@
-function CreateHashMapNode(key = null, value = null, nextNode = null) {
+function createNode(key = null, value = null, nextNode = null) {
   return {
     key,
     value,
@@ -6,4 +6,4 @@ function CreateHashMapNode(key = null, value = null, nextNode = null) {
   };
 }
 
-module.exports = CreateHashMapNode;
+module.exports = createNode;

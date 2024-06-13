@@ -1,6 +1,6 @@
 const LinkedList = require("./linkedlist");
 
-function CreateHashMap() {
+function createHashMap() {
   const bucketList = [];
   let capacity = 16;
   bucketList.length = capacity;
@@ -36,7 +36,7 @@ function CreateHashMap() {
         const list = new LinkedList();
         bucketList[hashCode] = list;
       }
-      bucketList[hashCode].appendHashMapNode(key, value);
+      bucketList[hashCode].appendNode(key, value);
     }
     const basePoint = Math.round(capacity * LOAD_FACTOR);
     if (length() > basePoint) {
@@ -161,4 +161,4 @@ function CreateHashMap() {
   };
 }
 
-module.exports = CreateHashMap;
+module.exports = createHashMap;
