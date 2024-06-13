@@ -1,8 +1,12 @@
-function createLinkedList() {
-  let headNode = null;
+const createNode = require("./node");
+class LinkedList {
 
-  const appendNode = (key) => {
-    const newNode = CreateNode(key);
+  constructor() {
+    this.headNode = null;
+  }
+
+  appendNode(key) {
+    const newNode = createNode(key);
     if (this.headNode === null) {
       this.headNode = newNode;
     } else {
@@ -13,7 +17,5 @@ function createLinkedList() {
       tailNode.nextNode = newNode;
     }
   };
-
-  return { headNode, appendNode };
 }
-module.exports = createLinkedList;
+module.exports = LinkedList;
